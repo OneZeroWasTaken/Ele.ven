@@ -6,13 +6,89 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
+    <Button
+        android:id="@+id/button_select_arrival"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:text="@string/select_time"
+        app:layout_constraintBottom_toTopOf="@id/button_select_lunch"
+        app:layout_constraintEnd_toStartOf="@id/text_arrival"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_arrival"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/arrival"
+        app:layout_constraintBottom_toTopOf="@id/text_lunch"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button_select_arrival"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button_select_lunch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/select_time"
+        app:layout_constraintBottom_toTopOf="@id/button_select_end"
+        app:layout_constraintEnd_toStartOf="@id/text_lunch"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_select_arrival" />
+
+    <TextView
+        android:id="@+id/text_lunch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/lunch"
+        app:layout_constraintBottom_toTopOf="@id/text_end"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button_select_lunch"
+        app:layout_constraintTop_toBottomOf="@id/text_arrival" />
+
+    <Button
+        android:id="@+id/button_select_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/select_time"
+        app:layout_constraintBottom_toTopOf="@id/layout_calculated_time_texts"
+        app:layout_constraintEnd_toStartOf="@id/text_end"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_select_lunch" />
+
+    <TextView
+        android:id="@+id/text_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/end"
+        app:layout_constraintBottom_toTopOf="@id/layout_calculated_time_texts"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button_select_end"
+        app:layout_constraintTop_toBottomOf="@id/text_lunch" />
+
+    <LinearLayout
+        android:id="@+id/layout_calculated_time_texts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/button_select_end">
+
+        <TextView
+            android:id="@+id/text_work_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Work time: " />
+
+        <TextView
+            android:id="@+id/text_flex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Flex: " />
+
+    </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
