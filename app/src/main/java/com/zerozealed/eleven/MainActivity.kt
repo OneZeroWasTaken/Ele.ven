@@ -2,19 +2,18 @@ package com.zerozealed.eleven
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import com.zerozealed.eleven.databinding.ActivityMainBinding
+import com.zerozealed.eleven.model.Time
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-    private var arrivalTime: Pair<Int, Int> = 8 to 0
-    private var lunchTime: Pair<Int, Int> = 0 to 30
-    private var endTime: Pair<Int, Int> = 16 to 30
+    private var arrivalTime = Time(8, 0)
+    private var lunchTime = Time(0, 30)
+    private var endTime = Time(16, 30)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,21 +27,21 @@ class MainActivity : AppCompatActivity() {
     private fun initButtons() {
         binding.buttonSelectArrival.setOnClickListener {
             openTimePicker { hour, minute ->
-                arrivalTime = hour to minute
+                arrivalTime = Time(hour, minute)
                 binding.textArrival.text = getString(R.string.time_template, "Arrival", hour, minute)
                 updateTimeTexts()
             }
         }
         binding.buttonSelectLunch.setOnClickListener {
             openTimePicker { hour, minute ->
-                lunchTime = hour to minute
+                lunchTime = Time(hour, minute)
                 binding.textLunch.text = getString(R.string.time_template, "Lunch", hour, minute)
                 updateTimeTexts()
             }
         }
         binding.buttonSelectEnd.setOnClickListener {
             openTimePicker { hour, minute ->
-                endTime = hour to minute
+                endTime = Time(hour, minute)
                 binding.textEnd.text = getString(R.string.time_template, "End", hour, minute)
                 updateTimeTexts()
             }
@@ -50,9 +49,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateTimeTexts() {
-        val workHours = endTime.first - lunchTime.first - arrivalTime.first
-        val workMinutes = endTime.second - lunchTime.second - arrivalTime.second
-        binding.textWorkTime.text = getString(R.string.time_template, "Work time", workHours, workMinutes)
+        val workTime = endTime - lunchTime - arrivalTime
+        binding.textWorkTime.text = workTime.toClockString()
     }
 
     private fun openTimePicker(selectedTime: (hour: Int, minute: Int) -> Unit) {
