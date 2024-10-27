@@ -31,7 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/select_time"
-        app:layout_constraintBottom_toTopOf="@id/button_select_end"
+        app:layout_constraintBottom_toTopOf="@id/button_select_leave"
         app:layout_constraintEnd_toStartOf="@id/text_lunch"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/button_select_arrival" />
@@ -41,29 +41,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/lunch"
-        app:layout_constraintBottom_toTopOf="@id/text_end"
+        app:layout_constraintBottom_toTopOf="@id/text_leave"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/button_select_lunch"
         app:layout_constraintTop_toBottomOf="@id/text_arrival" />
 
     <Button
-        android:id="@+id/button_select_end"
+        android:id="@+id/button_select_leave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/select_time"
         app:layout_constraintBottom_toTopOf="@id/layout_calculated_time_texts"
-        app:layout_constraintEnd_toStartOf="@id/text_end"
+        app:layout_constraintEnd_toStartOf="@id/text_leave"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/button_select_lunch" />
 
     <TextView
-        android:id="@+id/text_end"
+        android:id="@+id/text_leave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/end"
+        android:text="@string/leave"
         app:layout_constraintBottom_toTopOf="@id/layout_calculated_time_texts"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button_select_end"
+        app:layout_constraintStart_toEndOf="@+id/button_select_leave"
         app:layout_constraintTop_toBottomOf="@id/text_lunch" />
 
     <LinearLayout
@@ -74,7 +74,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button_select_end">
+        app:layout_constraintTop_toBottomOf="@id/button_select_leave">
 
         <TextView
             android:id="@+id/text_work_time"

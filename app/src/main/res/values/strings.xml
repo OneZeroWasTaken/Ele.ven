@@ -3,6 +3,6 @@
     <string name="select_time">Select time</string>
     <string name="arrival">Arrival</string>
     <string name="lunch">Lunch</string>
-    <string name="end">End</string>
+    <string name="leave">Leave</string>
     <string name="time_template">%s: %s</string>
 </resources>

@@ -16,7 +16,8 @@ class MainViewModel : ViewModel() {
     private val _leaveTime: MutableLiveData<Time> = MutableLiveData(defaultLeave)
     val leaveTime: LiveData<Time> = _leaveTime
 
-    fun getTotalWorkTime(): Time = leaveTime.value!! - lunchTime.value!! - arrivalTime.value!!
+    fun getTotalWorkTime(): Time =
+        leaveTime.requireValue() - lunchTime.requireValue() - arrivalTime.requireValue()
 
     fun setArrivalTime(time: Time) {
         _arrivalTime.value = time

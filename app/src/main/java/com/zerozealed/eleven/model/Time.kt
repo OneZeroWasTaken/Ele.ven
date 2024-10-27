@@ -7,7 +7,7 @@ import kotlin.time.Duration.Companion.minutes
 class Time(
     private val duration: Duration
 ) {
-    constructor(hour: Int, minute: Int): this(hour.hours + minute.minutes) {
+    constructor(hour: Int, minute: Int) : this(hour.hours + minute.minutes) {
         require(hour >= 0) {
             "Hour must be >= 0"
         }
@@ -15,6 +15,9 @@ class Time(
             "Minute must be in 0..<60"
         }
     }
+
+    val hours: Int = duration.inWholeHours.toInt()
+    val minutes: Int = duration.inWholeMinutes.toInt() % 60
 
     operator fun plus(other: Time): Time = Time(this.duration + other.duration)
 
