@@ -2,6 +2,7 @@ package com.zerozealed.eleven
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import com.zerozealed.eleven.databinding.ActivityMainBinding
@@ -10,50 +11,58 @@ import com.zerozealed.eleven.model.Time
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-
-    private var arrivalTime = Time(8, 0)
-    private var lunchTime = Time(0, 30)
-    private var endTime = Time(16, 30)
+    private lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
+        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         setContentView(binding.root)
 
         initButtons()
+        initObservers()
+    }
+
+    private fun initObservers() {
+        viewModel.arrivalTime.observe(this) { time ->
+            binding.textArrival.text = getString(R.string.time_template, "Arrival", time.toClockString())
+            updateTimeTexts()
+        }
+        viewModel.lunchTime.observe(this) { time ->
+            binding.textLunch.text = getString(R.string.time_template, "Lunch", time.toClockString())
+            updateTimeTexts()
+        }
+        viewModel.leaveTime.observe(this) { time ->
+            binding.textEnd.text = getString(R.string.time_template, "End", time.toClockString())
+            updateTimeTexts()
+        }
     }
 
     private fun initButtons() {
         binding.buttonSelectArrival.setOnClickListener {
-            openTimePicker { hour, minute ->
-                arrivalTime = Time(hour, minute)
-                binding.textArrival.text = getString(R.string.time_template, "Arrival", hour, minute)
-                updateTimeTexts()
+            openTimePicker { time ->
+                viewModel.setArrivalTime(time)
             }
         }
         binding.buttonSelectLunch.setOnClickListener {
-            openTimePicker { hour, minute ->
-                lunchTime = Time(hour, minute)
-                binding.textLunch.text = getString(R.string.time_template, "Lunch", hour, minute)
-                updateTimeTexts()
+            openTimePicker { time ->
+                viewModel.setLunchTime(time)
             }
         }
         binding.buttonSelectEnd.setOnClickListener {
-            openTimePicker { hour, minute ->
-                endTime = Time(hour, minute)
-                binding.textEnd.text = getString(R.string.time_template, "End", hour, minute)
-                updateTimeTexts()
+            openTimePicker { time ->
+                viewModel.setLeaveTime(time)
             }
         }
     }
 
     private fun updateTimeTexts() {
-        val workTime = endTime - lunchTime - arrivalTime
+        val workTime = viewModel.getTotalWorkTime()
         binding.textWorkTime.text = workTime.toClockString()
     }
 
-    private fun openTimePicker(selectedTime: (hour: Int, minute: Int) -> Unit) {
+    private fun openTimePicker(selectedTime: (time: Time) -> Unit) {
         val picker = MaterialTimePicker.Builder()
             .setTimeFormat(TimeFormat.CLOCK_24H)
             .setInputMode(MaterialTimePicker.INPUT_MODE_CLOCK)
@@ -64,7 +73,7 @@ class MainActivity : AppCompatActivity() {
 
         picker.show(supportFragmentManager, "TimePicker")
         picker.addOnPositiveButtonClickListener {
-            selectedTime(picker.hour, picker.minute)
+            selectedTime(Time(picker.hour, picker.minute))
         }
     }
 
