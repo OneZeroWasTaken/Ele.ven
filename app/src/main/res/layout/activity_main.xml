@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <TextView
+        android:id="@+id/text_total_flex"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toTopOf="@id/button_select_arrival"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="2:45" />
+
     <Button
         android:id="@+id/button_select_arrival"
         android:layout_width="wrap_content"
@@ -14,7 +26,7 @@
         app:layout_constraintBottom_toTopOf="@id/button_select_lunch"
         app:layout_constraintEnd_toStartOf="@id/text_arrival"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/text_total_flex" />
 
     <TextView
         android:id="@+id/text_arrival"
@@ -24,7 +36,7 @@
         app:layout_constraintBottom_toTopOf="@id/text_lunch"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/button_select_arrival"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/text_total_flex" />
 
     <Button
         android:id="@+id/button_select_lunch"
@@ -86,7 +98,13 @@
             android:id="@+id/text_flex"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Flex: " />
+            android:text="@string/flex_template" />
+
+        <Button
+            android:id="@+id/button_update_flex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/update_flex" />
 
     </LinearLayout>
 

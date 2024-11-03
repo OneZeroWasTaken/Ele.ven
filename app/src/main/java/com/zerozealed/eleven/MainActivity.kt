@@ -3,10 +3,12 @@ package com.zerozealed.eleven
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import com.zerozealed.eleven.databinding.ActivityMainBinding
 import com.zerozealed.eleven.model.Time
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,6 +21,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         setContentView(binding.root)
+
+        DataStoreHandler.init(this)
 
         initButtons()
         initObservers()
@@ -49,6 +53,13 @@ class MainActivity : AppCompatActivity() {
             )
             updateTimeTexts()
         }
+
+        lifecycleScope.launch {
+            DataStoreHandler.flexFlow.collect {
+                val time = Time(it).toClockString()
+                binding.textTotalFlex.text = getString(R.string.flex_template, time)
+            }
+        }
     }
 
     private fun initButtons() {
@@ -67,11 +78,19 @@ class MainActivity : AppCompatActivity() {
                 viewModel.setLeaveTime(time)
             }
         }
+        binding.buttonUpdateFlex.setOnClickListener {
+            lifecycleScope.launch {
+                DataStoreHandler.addFlex(this@MainActivity, viewModel.getTodaysFlex())
+            }
+        }
     }
 
     private fun updateTimeTexts() {
         val workTime = viewModel.getTotalWorkTime()
         binding.textWorkTime.text = workTime.toClockString()
+
+        val flexTime = viewModel.getTodaysFlex()
+        binding.textFlex.text = flexTime.toClockString()
     }
 
     private fun openTimePicker(startTime: Time, selectedTime: (time: Time) -> Unit) {

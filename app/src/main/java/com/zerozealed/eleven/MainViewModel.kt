@@ -31,6 +31,8 @@ class MainViewModel : ViewModel() {
         _leaveTime.value = time
     }
 
+    fun getTodaysFlex(): Time = getTotalWorkTime() - Time(8, 0)
+
     companion object {
         private val defaultArrival = Time(8, 0)
         private val defaultLunch = Time(0, 30)

@@ -16,8 +16,11 @@ class Time(
         }
     }
 
+    constructor(minutes: Int) : this(minutes.minutes)
+
     val hours: Int = duration.inWholeHours.toInt()
     val minutes: Int = duration.inWholeMinutes.toInt() % 60
+    val totalMinutes: Int = duration.inWholeMinutes.toInt()
 
     operator fun plus(other: Time): Time = Time(this.duration + other.duration)
 
