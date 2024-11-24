@@ -12,71 +12,130 @@
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textSize="28sp"
-        app:layout_constraintBottom_toTopOf="@id/button_select_arrival"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="@dimen/main_padding"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="2:45" />
 
-    <Button
-        android:id="@+id/button_select_arrival"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/layout_arrival"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/select_time"
-        app:layout_constraintBottom_toTopOf="@id/button_select_lunch"
-        app:layout_constraintEnd_toStartOf="@id/text_arrival"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_total_flex" />
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/small_distance"
+        android:paddingHorizontal="@dimen/main_padding"
+        app:layout_constraintTop_toBottomOf="@id/text_total_flex">
 
-    <TextView
-        android:id="@+id/text_arrival"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/arrival"
-        app:layout_constraintBottom_toTopOf="@id/text_lunch"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button_select_arrival"
-        app:layout_constraintTop_toBottomOf="@id/text_total_flex" />
+        <TextView
+            android:id="@+id/text_arrival"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/arrival" />
 
-    <Button
-        android:id="@+id/button_select_lunch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/select_time"
-        app:layout_constraintBottom_toTopOf="@id/button_select_leave"
-        app:layout_constraintEnd_toStartOf="@id/text_lunch"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button_select_arrival" />
+        <com.google.android.material.chip.ChipGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/text_lunch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/lunch"
-        app:layout_constraintBottom_toTopOf="@id/text_leave"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button_select_lunch"
-        app:layout_constraintTop_toBottomOf="@id/text_arrival" />
+            <com.google.android.material.chip.Chip
+                style="@style/Eleven.Chip"
+                tools:text="07:45" />
 
-    <Button
-        android:id="@+id/button_select_leave"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/select_time"
-        app:layout_constraintBottom_toTopOf="@id/layout_calculated_time_texts"
-        app:layout_constraintEnd_toStartOf="@id/text_leave"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button_select_lunch" />
+            <com.google.android.material.chip.Chip
+                style="@style/Eleven.Chip"
+                tools:text="08:00" />
 
-    <TextView
-        android:id="@+id/text_leave"
-        android:layout_width="wrap_content"
+            <com.google.android.material.chip.Chip
+                style="@style/Eleven.Chip"
+                tools:text="08:15" />
+        </com.google.android.material.chip.ChipGroup>
+
+        <Button
+            android:id="@+id/button_select_arrival"
+            style="?attr/materialIconButtonFilledStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:icon="@drawable/icon_reset" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_lunch"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/leave"
-        app:layout_constraintBottom_toTopOf="@id/layout_calculated_time_texts"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button_select_leave"
-        app:layout_constraintTop_toBottomOf="@id/text_lunch" />
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/main_padding"
+        app:layout_constraintTop_toBottomOf="@id/layout_arrival">
+
+        <TextView
+            android:id="@+id/text_lunch"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/lunch" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.chip.Chip
+                style="@style/Eleven.Chip"
+                tools:text="00:30" />
+
+            <com.google.android.material.chip.Chip
+                style="@style/Eleven.Chip"
+                tools:text="08:00" />
+
+            <com.google.android.material.chip.Chip
+                style="@style/Eleven.Chip"
+                tools:text="08:15" />
+        </com.google.android.material.chip.ChipGroup>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_select_lunch"
+            style="?attr/materialIconButtonFilledStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:icon="@drawable/icon_reset" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_leave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/main_padding"
+        app:layout_constraintTop_toBottomOf="@id/layout_lunch">
+
+        <TextView
+            android:id="@+id/text_leave"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/leave" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.chip.Chip
+                style="@style/Eleven.Chip"
+                tools:text="16:00" />
+
+            <com.google.android.material.chip.Chip
+                style="@style/Eleven.Chip"
+                tools:text="16:30" />
+
+            <com.google.android.material.chip.Chip
+                style="@style/Eleven.Chip"
+                tools:text="17:00" />
+        </com.google.android.material.chip.ChipGroup>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_select_leave"
+            style="?attr/materialIconButtonFilledStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:icon="@drawable/icon_reset" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/layout_calculated_time_texts"
@@ -86,7 +145,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button_select_leave">
+        app:layout_constraintTop_toBottomOf="@id/layout_leave">
 
         <TextView
             android:id="@+id/text_work_time"
